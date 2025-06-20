@@ -49,7 +49,7 @@ _![ER Diagram](https://github.com/ashwin1596/bigData/blob/main/ER_Diagram.png)_
 📌 **Relational model:**  
 _![R Diagram](https://github.com/ashwin1596/bigData/blob/main/Relational_Model.png)_
 
-📂 SQL Schema: [`Data_Import/table_creation.sql`](./Data_Import/table_creation.sql)
+📂 SQL Schema: [`Phase-1/Data_Import/table_creation.sql`](./Phase-1/Data_Import/table_creation.sql)
 
 ---
 
@@ -95,7 +95,7 @@ The document model embeds key information within a `trip` collection, where each
 }
 ```
 
-📂 MongoDB Script: [`phase-2/load_to_mongo.py`](./phase-2/load_to_mongo.py)
+📂 MongoDB Script: [`Phase-2/load_to_mongo.py`](./Phase-2/load_to_mongo.py)
 
 ---
 
@@ -110,7 +110,7 @@ The document model embeds key information within a `trip` collection, where each
 - Aggregations using `$group`, `$project`, `$unwind`
 - Geospatial queries on pickup zones
 
-📂 SQL Queries: [`phase-2/final_queries.sql`](phase-2/final_queries.sql)
+📂 SQL Queries: [`Phase-2/final_queries.sql`](Phase-2/final_queries.sql)
 
 ---
 
@@ -124,7 +124,7 @@ The document model embeds key information within a `trip` collection, where each
 - Compound indexes on `pickup.datetime` + `pickup.location.zone`
 - Performance monitored via `explain()` and `Atlas profiler`
 
-📂 Index creation: [`phase-2/indexes.sql`](phase-2/indexes.sql)
+📂 Index creation: [`Phase-2/indexes.sql`](Phase-2/indexes.sql)
 
 ---
 
@@ -135,7 +135,7 @@ The document model embeds key information within a `trip` collection, where each
 - Avoided transitive and partial dependencies
 - No derived or multivalued attributes in base schema
 
-📂 FD Discovery: [`phase-2/get_functional_dependencies.py`](phase-2/get_functional_dependencies.py)
+📂 FD Discovery: [`Phase-2/get_functional_dependencies.py`](Phase-2/get_functional_dependencies.py)
 
 ---
 
