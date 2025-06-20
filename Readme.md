@@ -135,6 +135,7 @@ The document model embeds key information within a `trip` collection, where each
 - Avoided transitive and partial dependencies
 - No derived or multivalued attributes in base schema
 
+###
 📂 FD Discovery: [`phase-2/get_functional_dependencies.py`](phase-2/get_functional_dependencies.py)
 ---
 
