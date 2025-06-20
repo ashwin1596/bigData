@@ -22,7 +22,7 @@ The ER model represents the high-level conceptual design of the dataset. It capt
 - Lookup/reference tables like `Payment`, `Vendor`, `RateCode` promote normalization and consistency.
 
 📌 **ER Diagram:**  
-_![ER Diagram](INSERT_PATH_TO_ER_DIAGRAM.png)_
+_![ER Diagram](https://github.com/ashwin1596/bigData/blob/main/ER_Diagram.png)_
 
 ---
 
@@ -45,6 +45,9 @@ _![ER Diagram](INSERT_PATH_TO_ER_DIAGRAM.png)_
 - Surrogate `ID` keys for dimension tables
 - Foreign key relationships with `ON DELETE CASCADE`
 - Referential integrity enforced for joins and aggregations
+
+📌 **Relational model:**  
+_![R Diagram](https://github.com/ashwin1596/bigData/blob/main/Relational_Model.png)_
 
 📂 SQL Schema: [`Data_Import/table_creation.sql`](./Data_Import/table_creation.sql)
 
