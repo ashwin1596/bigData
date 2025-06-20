@@ -205,6 +205,7 @@ python3 Phase-3/itemset_mining.py
 # Association rules
 python3 Phase-3/association_rules.py
 
+---
 
 ### 📂 Folder Structure
 ```
