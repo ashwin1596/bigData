@@ -55,13 +55,14 @@ _![R Diagram](https://github.com/ashwin1596/bigData/blob/main/Relational_Model.p
 
 ## 🗃️ Data Loading Instructions (SQL)
 
-```bash
-# Create tables
-psql -U your_user -d your_db -f Data_Import/table_creation.sql
+1. Store raw CSV files in `Phase-1/Data_Import/raw_data/`
+2. Run:  
+   ```bash
+   python3 DataReader/load_from_kaggle.py
 
-# Load data using COPY or pgAdmin
-psql -U your_user -d your_db -f Data_Import/data_load.sql
-```
+3. Execute SQL:
+   ```bash
+   psql -f DataReader/table_creation.sql
 
 ---
 
@@ -94,7 +95,7 @@ The document model embeds key information within a `trip` collection, where each
 }
 ```
 
-📂 MongoDB Script: [`MongoDB/trip_model.json`](./MongoDB/trip_model.json)
+📂 MongoDB Script: [`phase-2/load_to_mongo.py`](./phase-2/load_to_mongo.py)
 
 ---
 
@@ -109,7 +110,7 @@ The document model embeds key information within a `trip` collection, where each
 - Aggregations using `$group`, `$project`, `$unwind`
 - Geospatial queries on pickup zones
 
-📂 SQL Queries: [`SQL_Queries/analysis_queries.sql`](./SQL_Queries/analysis_queries.sql)
+📂 SQL Queries: [`phase-2/final_queries.sql`](phase-2/final_queries.sql)
 
 ---
 
@@ -123,7 +124,7 @@ The document model embeds key information within a `trip` collection, where each
 - Compound indexes on `pickup.datetime` + `pickup.location.zone`
 - Performance monitored via `explain()` and `Atlas profiler`
 
-📂 Benchmark Notebook: [`Benchmarks/index_tuning.ipynb`](./Benchmarks/index_tuning.ipynb)
+📂 Index creation: [`phase-2/indexes.sql`](phase-2/indexes.sql)
 
 ---
 
@@ -134,6 +135,7 @@ The document model embeds key information within a `trip` collection, where each
 - Avoided transitive and partial dependencies
 - No derived or multivalued attributes in base schema
 
+📂 FD Discovery: [`phase-2/get_functional_dependencies.py`](phase-2/get_functional_dependencies.py)
 ---
 
 ## 🧹 Data Cleaning
@@ -142,7 +144,7 @@ The document model embeds key information within a `trip` collection, where each
 - Consolidated payment types (`Credit Card`, `CC` → `Credit Card`)
 - Added flags like `IsWeekend`, `RushHour` for analysis
 
-📂 Cleaning Script: [`Data_Cleaning/cleaning_script.py`](./Data_Cleaning/cleaning_script.py)
+📂 Cleaning Script: [`Phase-3/clean_data.py`](Phase-3/clean_data.py)
 
 ---
 
@@ -153,8 +155,10 @@ Used Apriori to identify co-occurrence patterns between zones and payment types.
 - Example: `{Zone=Midtown, Payment=Credit Card} → Frequent set`
 - Minimum support threshold: 0.03
 
-📂 Notebook: [`Association_Mining/itemset_analysis.ipynb`](./Association_Mining/itemset_analysis.ipynb)
+📂 Preprocess: [`Phase-3/preprocess.py`](Phase-3/preprocess.py)
+📂 Mining: [`Phase-3/itemset_mining.py`](Phase-3/itemset_mining.py)
 
+📂 Mined Rules: [`Phase-3/[rules_2.txt, rules_3.txt, rules_4.txt]`]
 ---
 
 ## 🔗 Association Rule Mining
@@ -164,7 +168,7 @@ Generated rules such as:
 - `If PickupZone=Midtown → likely DropoffZone=Downtown Brooklyn (confidence=0.72)`
 - `If PaymentType=Cash → shorter trip distance (confidence=0.61)`
 
-📂 Notebook: [`Association_Mining/rule_mining.ipynb`](./Association_Mining/rule_mining.ipynb)
+📂 Notebook: [`Phase-3/association_rules.py`](Phase-3/association_rules.py)
 
 ---
 
@@ -183,45 +187,43 @@ Generated rules such as:
 
 ## ▶️ Execution Steps & Folder Structure
 
-```bash
-# Clone repo
-git clone https://github.com/your-repo/nyc-taxi-analysis.git
+# Load data
+python3 DataReader/load_from_kaggle.py
+psql -f DataReader/table_creation.sql
 
-# PostgreSQL setup
-cd Data_Import
-psql -U postgres -d nyc_taxi -f table_creation.sql
-psql -U postgres -d nyc_taxi -f data_load.sql
+# Clean data
+python3 Phase-3/clean_data.py
 
-# MongoDB setup
-mongoimport --db nyc_taxi --collection trips --file MongoDB/trip_model.json --jsonArray
-```
+# Preprocess for mining
+python3 Phase-3/preprocess.py
+
+# Frequent itemsets
+python3 Phase-3/itemset_mining.py
+
+# Association rules
+python3 Phase-3/association_rules.py
+
 
 ### 📂 Folder Structure
 ```
-├── README.md
-├── Data_Import/
-│   ├── table_creation.sql
-│   └── data_load.sql
-├── SQL_Queries/
-│   └── analysis_queries.sql
-├── MongoDB/
-│   └── trip_model.json
-├── Benchmarks/
-│   └── index_tuning.ipynb
-├── Association_Mining/
-│   ├── itemset_analysis.ipynb
-│   └── rule_mining.ipynb
-├── Data_Cleaning/
-│   └── cleaning_script.py
-├── Diagrams/
-│   └── ER_Diagram.png
+│   Readme.md
+│   ER_Diagram.png
+│   Relational_Model.png
+│
+├───DataReader/
+│   ├───load_from_kaggle.py
+│   └───table_creation.sql
+├───Phase-1/
+│   └───Data_Import/
+│       ├───load_from_kaggle.py
+│       └───table_creation.sql
+├───phase-2/
+│   ├───get_functional_dependencies.py
+│   ├───final_queries.sql
+│   └───indexes.sql
+└───Phase-3/
+    ├───clean_data.py
+    ├───preprocess.py
+    ├───itemset_mining.py
+    └───association_rules.py
 ```
-
----
-
-## 👨‍💻 Author
-
-Ashwin Kherde  
-[LinkedIn](https://www.linkedin.com/in/ashwinkherde) • [GitHub](https://github.com/ashwinkherde)
-
----
