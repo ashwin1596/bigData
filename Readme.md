@@ -189,20 +189,20 @@ Generated rules such as:
 
 ## ▶️ Execution Steps & Folder Structure
 
-# Load data
+### Load data
 python3 DataReader/load_from_kaggle.py
 psql -f DataReader/table_creation.sql
 
-# Clean data
+### Clean data
 python3 Phase-3/clean_data.py
 
-# Preprocess for mining
+### Preprocess for mining
 python3 Phase-3/preprocess.py
 
-# Frequent itemsets
+### Frequent itemsets
 python3 Phase-3/itemset_mining.py
 
-# Association rules
+### Association rules
 python3 Phase-3/association_rules.py
 
 ---
