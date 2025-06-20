@@ -135,8 +135,8 @@ The document model embeds key information within a `trip` collection, where each
 - Avoided transitive and partial dependencies
 - No derived or multivalued attributes in base schema
 
-### Files
 📂 FD Discovery: [`phase-2/get_functional_dependencies.py`](phase-2/get_functional_dependencies.py)
+
 ---
 
 ## 🧹 Data Cleaning
@@ -145,7 +145,6 @@ The document model embeds key information within a `trip` collection, where each
 - Consolidated payment types (`Credit Card`, `CC` → `Credit Card`)
 - Added flags like `IsWeekend`, `RushHour` for analysis
 
-### Files
 📂 Cleaning Script: [`Phase-3/clean_data.py`](Phase-3/clean_data.py)
 
 ---
@@ -157,11 +156,11 @@ Used Apriori to identify co-occurrence patterns between zones and payment types.
 - Example: `{Zone=Midtown, Payment=Credit Card} → Frequent set`
 - Minimum support threshold: 0.03
 
-### Files
 📂 Preprocess: [`Phase-3/preprocess.py`](Phase-3/preprocess.py)
 📂 Mining: [`Phase-3/itemset_mining.py`](Phase-3/itemset_mining.py)
 
 📂 Mined Rules: [`Phase-3/[rules_2.txt, rules_3.txt, rules_4.txt]`]
+
 ---
 
 ## 🔗 Association Rule Mining
@@ -171,7 +170,6 @@ Generated rules such as:
 - `If PickupZone=Midtown → likely DropoffZone=Downtown Brooklyn (confidence=0.72)`
 - `If PaymentType=Cash → shorter trip distance (confidence=0.61)`
 
-### Files
 📂 Notebook: [`Phase-3/association_rules.py`](Phase-3/association_rules.py)
 
 ---
