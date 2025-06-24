@@ -1,10 +1,26 @@
 # NYC Taxi Trip Data Analysis
 
-This project presents a comprehensive analysis and database design of the NYC Yellow Taxi trip dataset. It compares relational and document-based models (PostgreSQL & MongoDB), and applies data mining techniques including association rule mining and frequent itemset extraction.
+## Overview
+With the exponential growth in urban transportation data, analyzing and modeling taxi trip records can offer valuable insights for transit planning, policy-making, and operational optimization. This project focuses on a large-scale analysis of the NYC Yellow Taxi Trip dataset, leveraging both relational (PostgreSQL) and document-based (MongoDB) database paradigms. It encompasses end-to-end data handling — from ER modeling, schema normalization, and performance tuning to data mining techniques such as frequent itemset and association rule mining — to uncover actionable trends in trip behavior, payment preferences, and spatial-temporal patterns.
 
 ---
 
-## 📦 Dataset Source & Description
+## Objective
+The primary goal of this project is to design, implement, and compare relational and document-oriented data models for the NYC Taxi dataset in order to:
+
+- Construct normalized schemas and enforce referential integrity for OLAP-style analytical queries.
+
+- Design an efficient document model for flexible, real-time data access.
+
+- Evaluate query performance and indexing strategies across both systems.
+
+- Apply data mining techniques (Apriori, association rule mining) to extract frequent co-occurrence patterns between trip zones, payment types, and time-based factors.
+
+- Derive meaningful insights for urban mobility, such as trip hotspots, fare distribution, and temporal usage trends, while showcasing the trade-offs between different database architectures.
+
+---
+
+## Dataset Source & Description
 
 - **Source**: NYC Taxi & Limousine Commission (TLC)  
 - **Sample Size**: 44M+ trip records (reduced to ~1M for feasibility)  
@@ -12,7 +28,7 @@ This project presents a comprehensive analysis and database design of the NYC Ye
 
 ---
 
-## 🧩 Entity-Relationship (ER) Model
+## Entity-Relationship (ER) Model
 
 The ER model represents the high-level conceptual design of the dataset. It captures the key entities (`Trip`, `Vendor`, `Location`, `Payment`, `RateCode`, and `Time`) and their relationships.
 
@@ -21,12 +37,12 @@ The ER model represents the high-level conceptual design of the dataset. It capt
 - `Time` is modeled as a weak entity for flexible date-time analysis.
 - Lookup/reference tables like `Payment`, `Vendor`, `RateCode` promote normalization and consistency.
 
-📌 **ER Diagram:**  
+**ER Diagram:**  
 _![ER Diagram](https://github.com/ashwin1596/bigData/blob/main/ER_Diagram.png)_
 
 ---
 
-## 🧱 Relational Database Schema Design
+## Relational Database Schema Design
 
 ### Key Design Goals:
 - **Normalization** up to 3NF or BCNF
@@ -46,14 +62,14 @@ _![ER Diagram](https://github.com/ashwin1596/bigData/blob/main/ER_Diagram.png)_
 - Foreign key relationships with `ON DELETE CASCADE`
 - Referential integrity enforced for joins and aggregations
 
-📌 **Relational model:**  
+**Relational model:**  
 _![R Diagram](https://github.com/ashwin1596/bigData/blob/main/Relational_Model.png)_
 
 📂 SQL Schema: [`Phase-1/Data_Import/table_creation.sql`](./Phase-1/Data_Import/table_creation.sql)
 
 ---
 
-## 🗃️ Data Loading Instructions (SQL)
+## Data Loading Instructions (SQL)
 
 1. Store raw CSV files in `Phase-1/Data_Import/raw_data/`
 2. Run:  
@@ -99,7 +115,7 @@ The document model embeds key information within a `trip` collection, where each
 
 ---
 
-## 🔍 Query Examples & Performance Tuning
+## Query Examples & Performance Tuning
 
 ### PostgreSQL:
 - Top 5 zones by average fare
@@ -114,7 +130,7 @@ The document model embeds key information within a `trip` collection, where each
 
 ---
 
-## ⚡ Indexing Strategy & Performance Benchmarks
+## Indexing Strategy & Performance Benchmarks
 
 ### PostgreSQL:
 - Indexes on `PickupLocationID`, `DropoffLocationID`, `PickupDate`, `PaymentID`
@@ -128,7 +144,7 @@ The document model embeds key information within a `trip` collection, where each
 
 ---
 
-## 🔄 Functional Dependencies & Normalization
+## Functional Dependencies & Normalization
 
 - Ensured 3NF/BCNF: e.g.,  
   `Trip → PaymentID`, `PaymentID → PaymentType` ⇒ `Trip → PaymentType`
@@ -139,7 +155,7 @@ The document model embeds key information within a `trip` collection, where each
 
 ---
 
-## 🧹 Data Cleaning
+## Data Cleaning
 
 - Removed nulls and outliers (`fare_amount <= 0`, unrealistic trip distances)
 - Consolidated payment types (`Credit Card`, `CC` → `Credit Card`)
@@ -149,7 +165,7 @@ The document model embeds key information within a `trip` collection, where each
 
 ---
 
-## 🛒 Frequent Itemset Mining
+## Frequent Itemset Mining
 
 Used Apriori to identify co-occurrence patterns between zones and payment types.
 
@@ -163,7 +179,7 @@ Used Apriori to identify co-occurrence patterns between zones and payment types.
 
 ---
 
-## 🔗 Association Rule Mining
+## Association Rule Mining
 
 Generated rules such as:
 
@@ -174,7 +190,7 @@ Generated rules such as:
 
 ---
 
-## 🆚 Relational vs Document Database Justification
+## Relational vs Document Database Justification
 
 | Feature              | Relational (PostgreSQL)                     | Document (MongoDB)                        |
 |----------------------|---------------------------------------------|-------------------------------------------|
@@ -187,7 +203,7 @@ Generated rules such as:
 
 ---
 
-## ▶️ Execution Steps & Folder Structure
+## Execution Steps & Folder Structure
 
 ### Load data
 python3 DataReader/load_from_kaggle.py
