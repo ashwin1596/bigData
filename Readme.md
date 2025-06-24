@@ -1,4 +1,4 @@
-# NYC Taxi Trip Data Analysis
+# TaxiTrip Data Mining: Scalable Pattern Discovery on 44M Trips
 
 ## Overview
 With the exponential growth in urban transportation data, analyzing and modeling taxi trip records can offer valuable insights for transit planning, policy-making, and operational optimization. This project focuses on a large-scale analysis of the NYC Yellow Taxi Trip dataset, leveraging both relational (PostgreSQL) and document-based (MongoDB) database paradigms. It encompasses end-to-end data handling — from ER modeling, schema normalization, and performance tuning to data mining techniques such as frequent itemset and association rule mining — to uncover actionable trends in trip behavior, payment preferences, and spatial-temporal patterns.
